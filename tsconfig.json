@@ -1,17 +1,24 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "module": "es6",
-    "moduleResolution": "node",
-    "declaration": false,
-    "noImplicitAny": false,
-    "sourceMap": true,
-    "jsx": "react",
-    "noLib": false,
-    "allowJs": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true
-  },
-  "include": ["./src/**/*"]
+	"compilerOptions": {
+		"target": "es6",
+		"module": "es6",
+		"moduleResolution": "node",
+		"declaration": false,
+		"noImplicitAny": false,
+		"sourceMap": true,
+		"jsx": "react",
+		"noLib": false,
+		"allowJs": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"baseUrl": "src",
+		"paths": {
+			"api": ["api"],
+			"componets": ["components"],
+			"model": ["model"]
+		}
+	},
+	"include": ["./src/**/*"],
+	"exclude": ["node_modules"]
 }
