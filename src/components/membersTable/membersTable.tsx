@@ -3,6 +3,7 @@ import { MemberEntity } from "model/member";
 import { memberAPI } from "api/memberAPI";
 import { MemberRow } from "./memberRow";
 import { MemberHead } from "./memberHead";
+import { trackPromise } from "react-promise-tracker";
 
 interface Props {}
 
@@ -17,7 +18,9 @@ export const MembersTableComponent = (props: Props) => {
 	const { companie, setCompanie, members, setMembers } = useGetMembers();
 
 	const loadMembers = () => {
-		memberAPI.getAllMembers(companie).then((members) => setMembers(members));
+		trackPromise(
+			memberAPI.getAllMembers(companie).then((members) => setMembers(members))
+		);
 	};
 
 	return (
