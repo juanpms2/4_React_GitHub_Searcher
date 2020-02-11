@@ -6,17 +6,22 @@ class MemberAPI {
 		const gitHubMembersUrl: string = `https://api.github.com/orgs/${organizationName}/members`;
 
 		return fetch(gitHubMembersUrl)
-			.then((response) => this.checkStatus(response))
+			.then((response) => this.checkStatus(response, organizationName))
 			.then((response) => this.parseJSON(response))
 			.then((data) => this.resolveMembers(data));
 	}
 
-	private checkStatus(response: Response): Promise<Response> {
+	private checkStatus(
+		response: Response,
+		organizationName: string
+	): Promise<Response> {
 		if (response.status >= 200 && response.status < 300) {
 			return Promise.resolve(response);
 		} else {
 			let error = new Error(response.statusText);
-			alert(`Esta compañia no existe en nuestra base de datos: ${error}`);
+			alert(
+				`Esta compañia ${organizationName} no existe en nuestra base de datos: ${error}`
+			);
 			throw error;
 		}
 	}

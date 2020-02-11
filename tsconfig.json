@@ -15,7 +15,8 @@
 		"baseUrl": "src",
 		"paths": {
 			"api": ["api"],
-			"componets": ["components"],
+			"common": ["common"],
+			"components": ["components"],
 			"model": ["model"]
 		}
 	},

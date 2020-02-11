@@ -9,7 +9,8 @@ module.exports = {
 	resolve: {
 		alias: {
 			api: path.resolve(basePath, "./src/api"),
-			componets: path.resolve(basePath, "./src/componets"),
+			common: path.resolve(basePath, "./src/common"),
+			components: path.resolve(basePath, "./src/components"),
 			model: path.resolve(basePath, "./src/model")
 		},
 		extensions: [".js", ".ts", ".tsx"]

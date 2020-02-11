@@ -6,6 +6,7 @@ import "./spinner.css";
 
 export const Spinner = (props) => {
 	const { promiseInProgress } = usePromiseTracker();
+
 	return (
 		promiseInProgress && (
 			<div className="spinner">
