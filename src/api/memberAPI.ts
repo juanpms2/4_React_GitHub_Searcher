@@ -1,48 +1,73 @@
-import { MemberEntity, createDefaultMemberEntity } from "model/member";
+import * as React from "react";
+import {
+	MemberEntity,
+	createDefaultMemberEntity,
+	User,
+	createDefaultUser
+} from "model";
+import { SimpleModal } from "components/modal";
 
-class MemberAPI {
-	// Just return a copy of the mock data
-	getAllMembers(organizationName: string): Promise<MemberEntity[]> {
-		const gitHubMembersUrl: string = `https://api.github.com/orgs/${organizationName}/members`;
+export const getAllMembers = (
+	organizationName: string
+): Promise<MemberEntity[]> => {
+	const gitHubMembersUrl: string = `https://api.github.com/orgs/${organizationName}/members`;
 
-		return fetch(gitHubMembersUrl)
-			.then((response) => this.checkStatus(response, organizationName))
-			.then((response) => this.parseJSON(response))
-			.then((data) => this.resolveMembers(data));
+	return fetch(gitHubMembersUrl)
+		.then((response) => checkStatus(response, organizationName))
+		.then((response) => parseJSON(response))
+		.then((data) => resolveMembers(data, organizationName));
+};
+
+export const getUser = (userLogin: string): Promise<User> => {
+	const gitHubUserUrl: string = `https://api.github.com/users/${userLogin}`;
+
+	return fetch(gitHubUserUrl)
+		.then((response) => checkStatus(response, userLogin))
+		.then((response) => parseJSON(response))
+		.then((data) => resolveUser(data));
+};
+
+const checkStatus = (response: Response, name: string): Promise<Response> => {
+	if (response.status >= 200 && response.status < 300) {
+		return Promise.resolve(response);
+	} else {
+		let error = new Error(response.statusText);
+
+		alert(
+			`El usuario o compañía ${name} no existe en nuestra base de datos: ${error}`
+		);
+		throw error;
 	}
+};
 
-	private checkStatus(
-		response: Response,
-		organizationName: string
-	): Promise<Response> {
-		if (response.status >= 200 && response.status < 300) {
-			return Promise.resolve(response);
-		} else {
-			let error = new Error(response.statusText);
-			alert(
-				`Esta compañia ${organizationName} no existe en nuestra base de datos: ${error}`
-			);
-			throw error;
-		}
-	}
+const parseJSON = (response: Response): any => {
+	return response.json();
+};
 
-	private parseJSON(response: Response): any {
-		return response.json();
-	}
+const resolveMembers = (
+	data: any,
+	organizationName: string
+): Promise<MemberEntity[]> => {
+	const members = data.map((gitHubMember) => {
+		const member: MemberEntity = createDefaultMemberEntity();
 
-	private resolveMembers(data: any): Promise<MemberEntity[]> {
-		const members = data.map((gitHubMember) => {
-			var member: MemberEntity = createDefaultMemberEntity();
+		member.id = gitHubMember.id;
+		member.login = gitHubMember.login;
+		member.avatar_url = gitHubMember.avatar_url;
+		member.company = organizationName;
+		return member;
+	});
 
-			member.id = gitHubMember.id;
-			member.login = gitHubMember.login;
-			member.avatar_url = gitHubMember.avatar_url;
+	return Promise.resolve(members);
+};
 
-			return member;
-		});
+const resolveUser = (data: any): Promise<User> => {
+	const user: User = createDefaultUser();
 
-		return Promise.resolve(members);
-	}
-}
+	user.url = data.html_url;
+	user.repos_url = data.repos_url;
+	user.name = data.name;
+	user.bio = data.bio;
 
-export const memberAPI = new MemberAPI();
+	return Promise.resolve(user);
+};

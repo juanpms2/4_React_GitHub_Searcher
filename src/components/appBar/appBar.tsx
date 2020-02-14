@@ -65,13 +65,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const SearchAppBar = () => {
-	const myContext = React.useContext(MembersContext);
+	const membersContext = React.useContext(MembersContext);
 
 	const classes = useStyles();
 
 	const sendForm = (e) => {
 		e.preventDefault();
-		myContext.loadMembers();
+		membersContext.loadMembers();
 	};
 
 	return (
@@ -103,9 +103,9 @@ export const SearchAppBar = () => {
 								inputProps={{
 									"aria-label": "search"
 								}}
-								value={myContext.company}
+								value={membersContext.company}
 								type="text"
-								onChange={(e) => myContext.setCompany(e.target.value)}
+								onChange={(e) => membersContext.setCompany(e.target.value)}
 								className="input-text"
 							/>
 						</form>

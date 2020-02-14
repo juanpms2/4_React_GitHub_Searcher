@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Spinner } from "./common/components/spinner";
-import { MembersTableComponent, SearchAppBar } from "./components";
+import { SearchAppBar, SimpleContainer, SimpleModal } from "./components";
 import { MemberProvider } from "common/contexts";
 
 export const App: React.FunctionComponent = () => {
@@ -8,8 +8,9 @@ export const App: React.FunctionComponent = () => {
 		<>
 			<Spinner />
 			<MemberProvider>
+				<SimpleModal />
 				<SearchAppBar />
-				<MembersTableComponent />
+				<SimpleContainer />
 			</MemberProvider>
 		</>
 	);

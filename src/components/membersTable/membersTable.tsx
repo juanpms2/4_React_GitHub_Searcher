@@ -1,6 +1,6 @@
 import * as React from "react";
 import { MembersContext } from "common/contexts";
-import { MemberEntity } from "model/member";
+import { MemberEntity } from "model/member.model";
 import { MemberRow } from "./memberRow";
 import { MemberHead } from "./memberHead";
 
