@@ -21,7 +21,7 @@ export const SimpleContainer = () => {
 	const membersContext = React.useContext(MembersContext);
 	const title =
 		membersContext.organization != ""
-			? `Members Page of ${membersContext.organization.toUpperCase()}`
+			? `${membersContext.organization.toUpperCase()} Members Page`
 			: "";
 
 	const classes = useStyles();

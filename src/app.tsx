@@ -7,6 +7,7 @@ export const App: React.FunctionComponent = () => {
 	return (
 		<>
 			<Spinner />
+
 			<MemberProvider>
 				<SimpleModal />
 				<SearchAppBar />

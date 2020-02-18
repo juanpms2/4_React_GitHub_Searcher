@@ -31,11 +31,7 @@ export const MediaCard = (props: { member: MemberEntity }) => {
 	return (
 		<Card className={classes.root}>
 			<CardActionArea>
-				<CardMedia
-					className={classes.media}
-					// image={props.member.avatar_url}
-					title={props.member.login}
-				>
+				<CardMedia className={classes.media} title={props.member.login}>
 					<Avatar
 						alt="Remy Sharp"
 						src={props.member.avatar_url}

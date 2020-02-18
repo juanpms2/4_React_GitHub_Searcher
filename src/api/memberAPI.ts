@@ -5,7 +5,6 @@ import {
 	User,
 	createDefaultUser
 } from "model";
-import { SimpleModal } from "components/modal";
 
 export const getAllMembers = (
 	organizationName: string
@@ -33,10 +32,11 @@ const checkStatus = (response: Response, name: string): Promise<Response> => {
 	} else {
 		let error = new Error(response.statusText);
 
-		alert(
-			`El usuario o compañía ${name} no existe en nuestra base de datos: ${error}`
-		);
-		throw error;
+		// alert(
+		// 	`El usuario o compañía ${name} no existe en nuestra base de datos: ${error}`
+		// );
+
+		throw `El usuario o compañía ${name} no existe en nuestra base de datos: ${error}`;
 	}
 };
 
@@ -70,4 +70,8 @@ const resolveUser = (data: any): Promise<User> => {
 	user.bio = data.bio;
 
 	return Promise.resolve(user);
+};
+
+const resolveError = (error: any) => {
+	alert("hola error");
 };
