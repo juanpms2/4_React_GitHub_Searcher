@@ -8,10 +8,12 @@ module.exports = {
 	context: path.join(basePath, "src"),
 	resolve: {
 		alias: {
-			api: path.resolve(basePath, "./src/api"),
 			common: path.resolve(basePath, "./src/common"),
-			components: path.resolve(basePath, "./src/components"),
-			model: path.resolve(basePath, "./src/model")
+			core: path.resolve(basePath, "./src/core"),
+			layout: path.resolve(basePath, "./src/layout"),
+			model: path.resolve(basePath, "./src/model"),
+			pods: path.resolve(basePath, "./src/pods"),
+			scenes: path.resolve(basePath, "./src/scenes")
 		},
 		extensions: [".js", ".ts", ".tsx"]
 	},

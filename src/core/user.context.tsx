@@ -1,6 +1,6 @@
 import * as React from "react";
 import { User } from "model";
-import { getUser } from "api/memberAPI";
+import { getUser } from "common";
 
 interface Props {}
 

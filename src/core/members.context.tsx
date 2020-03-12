@@ -1,7 +1,7 @@
 import * as React from "react";
 import { MemberEntity } from "model";
 import { trackPromise } from "react-promise-tracker";
-import { getAllMembers } from "api/memberAPI";
+import { getAllMembers } from "common";
 
 interface Props {}
 
@@ -39,6 +39,10 @@ export const MemberProvider = (props) => {
 				})
 		);
 	};
+
+	React.useEffect(() => {
+		loadMembers();
+	}, [company]);
 
 	return (
 		<MembersContext.Provider

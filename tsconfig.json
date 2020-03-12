@@ -14,10 +14,12 @@
 		"esModuleInterop": true,
 		"baseUrl": "src",
 		"paths": {
-			"api": ["api"],
 			"common": ["common"],
-			"components": ["components"],
-			"model": ["model"]
+			"core": ["core"],
+			"layout": ["layout"],
+			"model": ["model"],
+			"pods": ["pods"],
+			"scenes": ["scenes"]
 		}
 	},
 	"include": ["./src/**/*"],

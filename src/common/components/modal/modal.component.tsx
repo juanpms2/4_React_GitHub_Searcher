@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { MembersContext } from "common/contexts";
+import { MembersContext } from "core";
 
 function getModalStyle() {
 	const top = 50;
@@ -34,6 +34,7 @@ export const SimpleModal = () => {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(membersContext.booleanError);
 
+	// Se ejecuta cada vez que cambia la propiedad y muestra el mensaje si el valor es true.
 	React.useEffect(() => {
 		setOpen(membersContext.booleanError);
 	}, [membersContext.booleanError]);

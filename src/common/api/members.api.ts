@@ -31,11 +31,6 @@ const checkStatus = (response: Response, name: string): Promise<Response> => {
 		return Promise.resolve(response);
 	} else {
 		let error = new Error(response.statusText);
-
-		// alert(
-		// 	`El usuario o compañía ${name} no existe en nuestra base de datos: ${error}`
-		// );
-
 		throw `El usuario o compañía ${name} no existe en nuestra base de datos: ${error}`;
 	}
 };
@@ -70,8 +65,4 @@ const resolveUser = (data: any): Promise<User> => {
 	user.bio = data.bio;
 
 	return Promise.resolve(user);
-};
-
-const resolveError = (error: any) => {
-	alert("hola error");
 };

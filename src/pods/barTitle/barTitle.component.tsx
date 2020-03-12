@@ -2,8 +2,8 @@ import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { FullWidthGrid } from "components/membersLayout";
-import { MembersContext } from "common/contexts";
+import { MembersScene } from "scenes";
+import { MembersContext } from "core";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export const SimpleContainer = () => {
+export const BarTitleComponent = () => {
 	const membersContext = React.useContext(MembersContext);
 	const title =
 		membersContext.organization != ""
@@ -31,12 +31,8 @@ export const SimpleContainer = () => {
 			<CssBaseline />
 			<Container maxWidth="lg">
 				<div className={classes.root}>
-					<SnackbarContent message={title} />
+					{title && <SnackbarContent message={title} />}
 				</div>
-
-				<Typography component="div" style={{ height: "100vh" }}>
-					<FullWidthGrid />
-				</Typography>
 			</Container>
 		</React.Fragment>
 	);
