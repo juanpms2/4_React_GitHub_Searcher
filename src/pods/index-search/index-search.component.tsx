@@ -1,44 +1,48 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
+import Container from "@material-ui/core/Container";
 import { fade, makeStyles } from "@material-ui/core/styles";
+import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
-import GitHubIcon from "@material-ui/icons/GitHub";
 import { linkRoutes } from "core";
 import { useHistory } from "react-router-dom";
 
-interface Props {}
-
 const useStyles = makeStyles((theme) => ({
 	root: {
-		flexGrow: 1
-	},
-	backGround: {
-		backgroundColor: "#24292E"
-	},
-	menuButton: {
-		marginRight: theme.spacing(2)
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		height: "100vh",
+		backgroundImage: "url(http://localhost:8080/public/logoGitHub2.png)",
+		backgroundRepeat: "no-repeat",
+		backgroundSize: "100%",
+		backgroundPosition: "center",
+		overflow: "hidden",
+		width: "100%",
+		minWidth: "420px",
+		maxWidth: "600px"
 	},
 	title: {
-		flexGrow: 1,
-		display: "none",
-		[theme.breakpoints.up("sm")]: {
-			display: "block"
-		}
+		width: "100%",
+		color: "#ffffff",
+		fontSize: "24px",
+		textAlign: "center",
+		position: "absolute",
+		top: "42%",
+		display: "flex",
+		justifyContent: "center"
 	},
 	search: {
 		position: "relative",
 		borderRadius: theme.shape.borderRadius,
-		backgroundColor: fade(theme.palette.common.white, 0.15),
+		backgroundColor: fade(theme.palette.common.white, 1),
 		"&:hover": {
-			backgroundColor: fade(theme.palette.common.white, 0.25)
+			backgroundColor: fade(theme.palette.common.white, 1)
 		},
 		marginLeft: 0,
 		width: "100%",
-		[theme.breakpoints.up("sm")]: {
+		[theme.breakpoints.up("xs")]: {
 			marginLeft: theme.spacing(1),
 			width: "auto"
 		}
@@ -59,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(1, 1, 1, 7),
 		transition: theme.transitions.create("width"),
 		width: "100%",
-		[theme.breakpoints.up("sm")]: {
+		[theme.breakpoints.up("xs")]: {
 			width: 120,
 			"&:focus": {
 				width: 200
@@ -68,10 +72,10 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export const SearchAppBar = () => {
+export const IndexSearchComponent: React.FunctionComponent = () => {
+	const classes = useStyles();
 	const [company, setCompany] = React.useState("");
 	const history = useHistory();
-	const classes = useStyles();
 
 	const sendForm = (e) => {
 		e.preventDefault();
@@ -79,27 +83,26 @@ export const SearchAppBar = () => {
 	};
 
 	return (
-		<div className={classes.root}>
-			<AppBar position="static" className={classes.backGround}>
-				<Toolbar>
-					<IconButton
-						edge="start"
-						className={classes.menuButton}
-						color="inherit"
-						aria-label="open drawer"
-					>
-						<GitHubIcon />
-					</IconButton>
-					<Typography className={classes.title} variant="h6" noWrap>
-						GitHub Search...
-					</Typography>
+		<React.Fragment>
+			<CssBaseline />
+			<Container
+				style={{
+					display: "flex",
+					justifyContent: "center",
+					width: "100%",
+					maxWidth: "900px"
+				}}
+				fixed
+			>
+				<Typography component="div" className={classes.root}>
+					<div className={classes.title}>GitHub Search...</div>
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>
 							<SearchIcon onClick={sendForm} />
 						</div>
 						<form onSubmit={sendForm}>
 							<InputBase
-								placeholder="Ej: lemoncode"
+								placeholder="Search…"
 								classes={{
 									root: classes.inputRoot,
 									input: classes.inputInput
@@ -107,14 +110,15 @@ export const SearchAppBar = () => {
 								inputProps={{
 									"aria-label": "search"
 								}}
+								value={company}
 								type="text"
 								onChange={(e) => setCompany(e.target.value)}
 								className="input-text"
 							/>
 						</form>
 					</div>
-				</Toolbar>
-			</AppBar>
-		</div>
+				</Typography>
+			</Container>
+		</React.Fragment>
 	);
 };

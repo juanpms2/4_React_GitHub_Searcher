@@ -6,7 +6,8 @@ import { Spinner, SimpleModal } from "common";
 import { SearchAppBar } from "common";
 import { BarTitleComponent } from "pods";
 import { MemberProvider } from "core";
-import { IndexScene } from "scenes/index.scene";
+import { IndexScene } from "scenes";
+import { FileMemberScene } from "scenes";
 
 export const App: React.FunctionComponent = () => {
 	return (
@@ -23,9 +24,14 @@ export const App: React.FunctionComponent = () => {
 							component={IndexScene}
 						/>
 						<Route
-							exact={true}
+							exact={false}
 							path={[switchRoutes.members]}
 							component={MembersScene}
+						/>
+						<Route
+							exact={true}
+							path={[switchRoutes.fileMember]}
+							component={FileMemberScene}
 						/>
 					</Switch>
 				</HashRouter>

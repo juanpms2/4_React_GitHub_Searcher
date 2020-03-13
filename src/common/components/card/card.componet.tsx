@@ -10,6 +10,8 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import { MemberEntity } from "model";
+import { linkRoutes } from "core";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -27,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const MediaCard = (props: { member: MemberEntity }) => {
 	const classes = useStyles();
+	const history = useHistory();
+
+	const loadMember = (value) => {
+		history.push(linkRoutes.fileMember(value));
+	};
 
 	return (
 		<Card className={classes.root}>
@@ -48,10 +55,12 @@ export const MediaCard = (props: { member: MemberEntity }) => {
 				</CardContent>
 			</CardActionArea>
 			<CardActions>
-				<Button size="small" color="primary">
-					<Link href="#" target="_blank" variant="button">
-						Ver Perfil
-					</Link>
+				<Button
+					size="small"
+					color="primary"
+					onClick={(e) => loadMember(props.member.id)}
+				>
+					<Link variant="button">Ver Perfil</Link>
 				</Button>
 			</CardActions>
 		</Card>

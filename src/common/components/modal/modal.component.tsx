@@ -57,7 +57,7 @@ export const SimpleModal = () => {
 			>
 				<div style={modalStyle} className={classes.paper}>
 					<h2 id="simple-modal-title" className={classes.error}>
-						Error: {membersContext.company} no existe.
+						Error: {membersContext.organization} no existe.
 					</h2>
 					<p id="simple-modal-description">{membersContext.txtError}</p>
 					<button type="button" onClick={handleClose}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { MemoryRouter as Router } from "react-router";
+import { MemoryRouter, Route } from "react-router";
 import { Link } from "react-router-dom";
 import Pagination from "@material-ui/lab/Pagination";
 import PaginationItem from "@material-ui/lab/PaginationItem";
@@ -11,19 +11,33 @@ export const PaginationLink = () => {
 	return (
 		<>
 			{membersContext.members.length > 0 && (
-				<Router>
-					<Pagination
-						count={membersContext.members.length / 4 - 1}
-						renderItem={(item) => (
-							<PaginationItem
-								component={Link}
-								to={`/cars${item.page === 1 ? "" : `?page=${item.page}`}`}
-								{...item}
-							/>
-						)}
-						className
-					/>
-				</Router>
+				<MemoryRouter
+					initialEntries={[`/members/${membersContext.organization}/page=${0}`]}
+					initialIndex={0}
+				>
+					<Route>
+						{({ location }) => {
+							const query = new URLSearchParams(location.search);
+							const page = parseInt(query.get("page"), 4) || 1;
+
+							return (
+								<Pagination
+									page={page}
+									count={Math.round(membersContext.members.length / 4 - 1)}
+									renderItem={(item) => (
+										<PaginationItem
+											component={Link}
+											to={`/members/${membersContext.organization}/page=${
+												item.page === 1 ? "" : `?page=${item.page}`
+											}`}
+											{...item}
+										/>
+									)}
+								/>
+							);
+						}}
+					</Route>
+				</MemoryRouter>
 			)}
 		</>
 	);

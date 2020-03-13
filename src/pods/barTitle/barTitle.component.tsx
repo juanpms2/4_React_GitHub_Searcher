@@ -1,11 +1,9 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { MembersScene } from "scenes";
-import { MembersContext } from "core";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import { makeStyles } from "@material-ui/core/styles";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -18,11 +16,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const BarTitleComponent = () => {
-	const membersContext = React.useContext(MembersContext);
-	const title =
-		membersContext.organization != ""
-			? `${membersContext.organization.toUpperCase()} Members Page`
-			: "";
+	const { organization } = useParams();
+	const title = organization && `${organization.toUpperCase()} Members`;
 
 	const classes = useStyles();
 
@@ -31,7 +26,12 @@ export const BarTitleComponent = () => {
 			<CssBaseline />
 			<Container maxWidth="lg">
 				<div className={classes.root}>
-					{title && <SnackbarContent message={title} />}
+					{title && (
+						<SnackbarContent
+							message={title}
+							style={{ backgroundColor: "#24292E" }}
+						/>
+					)}
 				</div>
 			</Container>
 		</React.Fragment>
