@@ -52,8 +52,9 @@ const useStyles = makeStyles((theme) => ({
 const useLoadMembers = () => {
 	const [members, setMembers] = React.useState<MemberEntity[]>([]);
 	const membersContext = React.useContext(MembersContext);
+	const ac = new AbortController();
 
-	const loadMembers = (organization) => {
+	const loadMembers = (organization, , { signal: ac.signal }) => {
 		trackPromise(
 			getAllMembers(organization)
 				.then((members) => {
@@ -95,14 +96,11 @@ export const MembersCollectionComponent: React.FunctionComponent<Props> = (
 		setShowMembers(members.slice(init, fin));
 	}, [organization, page]);
 
-	const handleChange = (event, value) => {
-		setPage(value);
-		showMembers.splice(0);
-		setShowMembers(members.slice(init, fin));
-		fin < members.length - 1 && init >= 0
-			? page <= totalMembers && setFin(fin + increment)
-			: page === totalMembers && setFin(fin - increment);
-	};
+	const next = () => {};
+
+	const back = () => {};
+
+	const handleChange = () => {};
 
 	return (
 		<>
@@ -118,34 +116,8 @@ export const MembersCollectionComponent: React.FunctionComponent<Props> = (
 				</Grid>
 			</div>
 			<div className={classes.root}>
-				<MemoryRouter
-					initialEntries={[`${linkRoutes.members(organization)}`]}
-					initialIndex={0}
-				>
-					<Route>
-						{({ location }) => {
-							const query = new URLSearchParams(location.search);
-							const page = parseInt(query.get("page"), 10) || 1;
-
-							return (
-								<Pagination
-									page={page}
-									count={totalMembers}
-									renderItem={(item) => (
-										<PaginationItem
-											component={Link}
-											to={`${linkRoutes.members(organization)}${
-												item.page === 0 ? "" : `?page=${item.page}`
-											}`}
-											{...item}
-										/>
-									)}
-									onChange={handleChange}
-								/>
-							);
-						}}
-					</Route>
-				</MemoryRouter>
+				<Typography>Page: {page}</Typography>
+				<Pagination count={totalMembers} page={page} onChange={handleChange} />
 			</div>
 		</>
 	);
