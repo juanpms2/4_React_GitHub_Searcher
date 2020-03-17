@@ -87,7 +87,7 @@ export const SearchAppBar = () => {
 						className={classes.menuButton}
 						color="inherit"
 						aria-label="open drawer"
-						onClick={history.push(linkRoutes.root)}
+						onClick={(e) => history.push(linkRoutes.root)}
 					>
 						<GitHubIcon />
 					</IconButton>

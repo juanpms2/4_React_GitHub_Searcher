@@ -3,8 +3,6 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import { switchRoutes } from "core";
 import { MembersScene } from "scenes";
 import { Spinner, SimpleModal } from "common";
-import { SearchAppBar } from "common";
-import { BarTitleComponent } from "pods";
 import { MemberProvider } from "core";
 import { IndexScene } from "scenes";
 import { FileMemberScene } from "scenes";

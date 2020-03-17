@@ -1,4 +1,4 @@
-import { generatePath } from "react-router";
+import { generatePath } from "react-router-dom";
 
 interface SwitchRoutes {
 	root: string;
@@ -10,12 +10,11 @@ interface SwitchRoutes {
 export const switchRoutes: SwitchRoutes = {
 	root: "/",
 	index: "/index",
-	members: "/members/:organization?",
+	members: "/members/:organization",
 	fileMember: "/file-member/:id"
 };
 
 type NavigationFunction = (id: string | number) => string;
-type NavigationPageFunction = (organization: string, page: number) => string;
 
 interface LinkRoutes extends Omit<SwitchRoutes, "fileMember" | "members"> {
 	fileMember: NavigationFunction;

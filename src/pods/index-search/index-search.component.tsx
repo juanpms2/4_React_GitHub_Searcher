@@ -110,7 +110,7 @@ export const IndexSearchComponent: React.FunctionComponent = () => {
 								inputProps={{
 									"aria-label": "search"
 								}}
-								value={company}
+								// value={company}
 								type="text"
 								onChange={(e) => setCompany(e.target.value)}
 								className="input-text"
