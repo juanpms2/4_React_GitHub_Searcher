@@ -11,10 +11,10 @@ export const switchRoutes: SwitchRoutes = {
 	root: "/",
 	index: "/index",
 	members: "/members/:organization",
-	fileMember: "/file-member/:id"
+	fileMember: "/file-member/:login"
 };
 
-type NavigationFunction = (id: string | number) => string;
+type NavigationFunction = (login: string) => string;
 
 interface LinkRoutes extends Omit<SwitchRoutes, "fileMember" | "members"> {
 	fileMember: NavigationFunction;
@@ -23,7 +23,7 @@ interface LinkRoutes extends Omit<SwitchRoutes, "fileMember" | "members"> {
 
 export const linkRoutes: LinkRoutes = {
 	...switchRoutes,
-	fileMember: (id) => generatePath(switchRoutes.fileMember, { id }),
+	fileMember: (login) => generatePath(switchRoutes.fileMember, { login }),
 	members: (organization) =>
 		generatePath(switchRoutes.members, { organization })
 };

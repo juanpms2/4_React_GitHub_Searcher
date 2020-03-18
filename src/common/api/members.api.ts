@@ -2,8 +2,8 @@ import * as React from "react";
 import {
 	MemberEntity,
 	createDefaultMemberEntity,
-	User,
-	createDefaultUser
+	UserEntity,
+	createDefaultUserEntity
 } from "model";
 
 export const getAllMembers = (
@@ -17,11 +17,11 @@ export const getAllMembers = (
 		.then((data) => resolveMembers(data, organizationName));
 };
 
-export const getUser = (userLogin: string): Promise<User> => {
-	const gitHubUserUrl: string = `https://api.github.com/users/${userLogin}`;
+export const getUser = (login: string): Promise<UserEntity> => {
+	const gitHubUserUrl: string = `https://api.github.com/users/${login}`;
 
 	return fetch(gitHubUserUrl)
-		.then((response) => checkStatus(response, userLogin))
+		.then((response) => checkStatus(response, login))
 		.then((response) => parseJSON(response))
 		.then((data) => resolveUser(data));
 };
@@ -56,13 +56,40 @@ const resolveMembers = (
 	return Promise.resolve(members);
 };
 
-const resolveUser = (data: any): Promise<User> => {
-	const user: User = createDefaultUser();
+const resolveUser = (data: UserEntity): Promise<UserEntity> => {
+	const user: UserEntity = { ...data };
 
-	user.url = data.html_url;
-	user.repos_url = data.repos_url;
-	user.name = data.name;
-	user.bio = data.bio;
+	// user.login= data.login;
+	// user.id= data.id;
+	// user.node_id= data.node_id;
+	// user.avatar_url= data.avatar_url;
+	// user.gravatar_id= data.gravatar_id;
+	// user.url= data.url;
+	// user.html_url= data.html_url;
+	// user.followers_url= data.followers_url;
+	// user.following_url= data.following_url;
+	// user.gists_url= data.gists_url;
+	// user.starred_url= data.starred_url;
+	// user.subscriptions_url= data.;
+	// user.organizations_url= data.string;
+	// user.repos_url= data.string;
+	// user.events_url= data.string;
+	// user.received_events_url= data.string;
+	// user.type= data.string;
+	// user.site_admin= boolean;
+	// user.name= data.string;
+	// user.company= data.string;
+	// user.blog= data.string;
+	// user.location= data.string;
+	// user.email= data.string;
+	// user.hireable= data.string;
+	// user.bio= data.string;
+	// user.public_repos= data.number;
+	// user.public_gists= data.number;
+	// user.followers= data.number;
+	// user.following= data.number;
+	// user.created_at= data.string;
+	// user.updated_at= data.string;
 
 	return Promise.resolve(user);
 };

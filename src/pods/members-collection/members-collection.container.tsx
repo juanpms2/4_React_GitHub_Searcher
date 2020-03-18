@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import { getAllMembers } from "common";
 import { trackPromise } from "react-promise-tracker";
 import { MembersContext } from "core";
-import { MemberEntity } from "model";
+import { linkRoutes } from "core";
+import { useHistory } from "react-router-dom";
 
 const useLoadMembers = () => {
 	const membersContext = React.useContext(MembersContext);
@@ -32,6 +33,7 @@ const useLoadMembers = () => {
 
 export const MembersCollectionContainer: React.FunctionComponent = () => {
 	const { organization } = useParams();
+	const history = useHistory();
 	const { membersContext, loadMembers } = useLoadMembers();
 	const [page, setPage] = React.useState(1);
 	const increment: number = 4;
@@ -39,12 +41,15 @@ export const MembersCollectionContainer: React.FunctionComponent = () => {
 	const [fin, setFin] = React.useState<number>(init + increment);
 	const totalMembers: number = Math.round(membersContext.members.length / 4);
 
+	const loadMember = (value) => {
+		history.push(linkRoutes.fileMember(value));
+	};
+
 	const reInicia = () => {
 		setInit(0);
 		setFin(increment);
 		setPage(1);
 		membersContext.members.slice(0, increment);
-		console.log(`reinicia ${init}, ${fin}, ${page}`);
 	};
 
 	const handleChange = (event, value) => {
@@ -64,6 +69,7 @@ export const MembersCollectionContainer: React.FunctionComponent = () => {
 			totalMembers={totalMembers}
 			page={page}
 			handleChange={handleChange}
+			loadMember={loadMember}
 		/>
 	);
 };

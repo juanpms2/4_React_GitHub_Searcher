@@ -3,10 +3,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { MemberEntity } from "model";
-import { MediaCard } from "common";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
+import Link from "@material-ui/core/Link";
 import Pagination from "@material-ui/lab/Pagination";
-import { Link } from "react-router-dom";
 import PaginationItem from "@material-ui/lab/PaginationItem";
 
 interface Props {
@@ -14,6 +20,7 @@ interface Props {
 	totalMembers: number;
 	page: number;
 	handleChange: (event: Event, value: number) => void;
+	loadMember: (login: string) => void;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +41,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 	pagination: {
 		margin: "30px auto"
+	},
+	carRoot: {
+		maxWidth: 345
+	},
+	media: {
+		height: 140
+	},
+	large: {
+		width: theme.spacing(18),
+		height: theme.spacing(18),
+		margin: "5% auto"
 	}
 }));
 
@@ -41,7 +59,7 @@ export const MembersCollectionComponent: React.FunctionComponent<Props> = (
 	props
 ) => {
 	const classes = useStyles();
-	const { showMembers, totalMembers, page, handleChange } = props;
+	const { showMembers, totalMembers, page, handleChange, loadMember } = props;
 
 	return (
 		<>
@@ -50,15 +68,42 @@ export const MembersCollectionComponent: React.FunctionComponent<Props> = (
 					{showMembers.map((member: MemberEntity) => (
 						<Grid item xs={8} sm={4} md={3} key={member.id}>
 							<Paper className={classes.paper}>
-								<MediaCard member={member} />
+								<Card className={classes.carRoot}>
+									<CardActionArea>
+										<CardMedia className={classes.media} title={member.login}>
+											<Avatar
+												alt="Remy Sharp"
+												src={member.avatar_url}
+												className={classes.large}
+											/>
+										</CardMedia>
+										<CardContent>
+											<Typography gutterBottom variant="h5" component="h2">
+												{member.login}
+											</Typography>
+											<Typography gutterBottom variant="body2" component="h6">
+												{member.company}
+											</Typography>
+										</CardContent>
+									</CardActionArea>
+									<CardActions>
+										<Button
+											size="small"
+											color="primary"
+											onClick={(e) => loadMember(member.login)}
+										>
+											<Link variant="button">Ver Perfil</Link>
+										</Button>
+									</CardActions>
+								</Card>
 							</Paper>
 						</Grid>
 					))}
 				</Grid>
 			</div>
 			<div className={classes.root}>
-				<Typography>Page: {page}</Typography>
 				<Pagination
+					className={classes.pagination}
 					count={totalMembers}
 					page={page}
 					onChange={handleChange}
