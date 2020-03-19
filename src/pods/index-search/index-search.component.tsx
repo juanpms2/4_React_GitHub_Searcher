@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: "center",
 		alignItems: "center",
 		height: "100vh",
-		backgroundImage: "url(http://localhost:8080/public/logoGitHub2.png)",
+		backgroundImage: "url(../../../public/logoGitHub2.png)",
 		backgroundRepeat: "no-repeat",
 		backgroundSize: "100%",
 		backgroundPosition: "center",
@@ -110,7 +110,6 @@ export const IndexSearchComponent: React.FunctionComponent = () => {
 								inputProps={{
 									"aria-label": "search"
 								}}
-								// value={company}
 								type="text"
 								onChange={(e) => setCompany(e.target.value)}
 								className="input-text"

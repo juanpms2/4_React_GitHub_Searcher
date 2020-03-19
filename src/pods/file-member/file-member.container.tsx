@@ -4,8 +4,6 @@ import { getUser } from "common";
 import { useParams } from "react-router-dom";
 import { trackPromise } from "react-promise-tracker";
 import { UserContext } from "core";
-import { linkRoutes } from "core";
-import { useHistory } from "react-router-dom";
 
 const useLoadMember = () => {
 	const userContext = React.useContext(UserContext);
@@ -18,8 +16,7 @@ const useLoadMember = () => {
 					userContext.setUser([user]);
 					userContext.setMember(login);
 					userContext.setBooleanError(false);
-					console.log(user);
-					// return user;
+					return user;
 				})
 				.catch((error) => {
 					userContext.setMember(login);
@@ -34,7 +31,6 @@ const useLoadMember = () => {
 
 export const FileCardMemberContainer: React.FunctionComponent = () => {
 	const { login } = useParams();
-	const history = useHistory();
 	const { userContext, loadUser } = useLoadMember();
 
 	React.useEffect(() => {

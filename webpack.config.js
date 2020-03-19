@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CheckerPlugin } = require("awesome-typescript-loader");
 const path = require("path");
 
 const basePath = __dirname;
@@ -18,11 +19,12 @@ module.exports = {
 		extensions: [".js", ".ts", ".tsx"]
 	},
 	entry: ["./index.tsx"],
+	devtool: "source-map",
 	output: {
 		path: path.join(basePath, "dist"),
 		filename: "[name].js"
 	},
-	devtool: "inline-source-map",
+
 	devServer: {
 		inline: true,
 		host: "localhost",
@@ -55,10 +57,23 @@ module.exports = {
 			}
 		]
 	},
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				vendor: {
+					chunks: "all",
+					name: "vendor",
+					test: /[\\/]node_modules[\\/]/,
+					enforce: true
+				}
+			}
+		}
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			filename: "index.html",
 			template: "index.html"
-		})
+		}),
+		new CheckerPlugin()
 	]
 };

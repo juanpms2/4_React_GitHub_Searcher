@@ -1,11 +1,9 @@
 import * as React from "react";
 import { MembersCollectionComponent } from "./members-collection.component";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { getAllMembers } from "common";
 import { trackPromise } from "react-promise-tracker";
-import { MembersContext } from "core";
-import { linkRoutes } from "core";
-import { useHistory } from "react-router-dom";
+import { MembersContext, linkRoutes } from "core";
 
 const useLoadMembers = () => {
 	const membersContext = React.useContext(MembersContext);

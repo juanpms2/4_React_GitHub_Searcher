@@ -1,11 +1,8 @@
 import * as React from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
-import { switchRoutes } from "core";
-import { MembersScene } from "scenes";
 import { Spinner, SimpleModal } from "common";
-import { MemberProvider, UserProvider } from "core";
-import { IndexScene } from "scenes";
-import { FileMemberScene } from "scenes";
+import { MemberProvider, UserProvider, switchRoutes } from "core";
+import { IndexScene, MembersScene, FileMemberScene } from "scenes";
 
 export const App: React.FunctionComponent = () => {
 	return (

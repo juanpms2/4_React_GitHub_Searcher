@@ -2,7 +2,7 @@ import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({

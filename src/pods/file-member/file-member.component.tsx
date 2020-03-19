@@ -10,14 +10,12 @@ import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-
+import Link from "@material-ui/core/Link";
 import { UserEntity } from "model";
-import { Link } from "@material-ui/core";
 
 interface Props {
 	user: UserEntity[];
@@ -47,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			transform: "rotate(180deg)"
 		},
 		avatar: {
-			backgroundColor: red[500]
+			backgroundColor: "#24292E"
 		}
 	})
 );
@@ -66,7 +64,7 @@ export const FileCardMemberComponent: React.FunctionComponent<Props> = (
 	return (
 		<>
 			{user.map((dataUser: UserEntity) => (
-				<Card className={classes.root}>
+				<Card className={classes.root} key={dataUser.id}>
 					<CardHeader
 						avatar={
 							<Avatar aria-label="recipe" className={classes.avatar}>

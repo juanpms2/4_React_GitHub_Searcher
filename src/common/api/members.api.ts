@@ -1,10 +1,4 @@
-import * as React from "react";
-import {
-	MemberEntity,
-	createDefaultMemberEntity,
-	UserEntity,
-	createDefaultUserEntity
-} from "model";
+import { MemberEntity, createDefaultMemberEntity, UserEntity } from "model";
 
 export const getAllMembers = (
 	organizationName: string
@@ -58,38 +52,6 @@ const resolveMembers = (
 
 const resolveUser = (data: UserEntity): Promise<UserEntity> => {
 	const user: UserEntity = { ...data };
-
-	// user.login= data.login;
-	// user.id= data.id;
-	// user.node_id= data.node_id;
-	// user.avatar_url= data.avatar_url;
-	// user.gravatar_id= data.gravatar_id;
-	// user.url= data.url;
-	// user.html_url= data.html_url;
-	// user.followers_url= data.followers_url;
-	// user.following_url= data.following_url;
-	// user.gists_url= data.gists_url;
-	// user.starred_url= data.starred_url;
-	// user.subscriptions_url= data.;
-	// user.organizations_url= data.string;
-	// user.repos_url= data.string;
-	// user.events_url= data.string;
-	// user.received_events_url= data.string;
-	// user.type= data.string;
-	// user.site_admin= boolean;
-	// user.name= data.string;
-	// user.company= data.string;
-	// user.blog= data.string;
-	// user.location= data.string;
-	// user.email= data.string;
-	// user.hireable= data.string;
-	// user.bio= data.string;
-	// user.public_repos= data.number;
-	// user.public_gists= data.number;
-	// user.followers= data.number;
-	// user.following= data.number;
-	// user.created_at= data.string;
-	// user.updated_at= data.string;
 
 	return Promise.resolve(user);
 };
