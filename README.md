@@ -12,6 +12,8 @@ Se amplia con lo siguiente:
 - Añadir paginación o scroll infinito.
 - Navegar a página de detalles de un miembro.
 
+Aparte de lo requerido se ha añadido la configuración correspondiente de webpack para producción y de rendimiento.
+
 ## Capturas de la aplicación
 
 ### Index
